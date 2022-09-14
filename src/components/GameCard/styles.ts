@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     marginRight: 24,
   },
   cover: {
-    width: 240,
+    width: 200,
     height: 320,
     justifyContent: 'flex-end',
     borderRadius: 8,
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   footer: {
     width: '100%',
-    height: 120,
+    height: 102,
     padding: 16,
     justifyContent: 'flex-end'
   },
