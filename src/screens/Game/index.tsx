@@ -24,6 +24,7 @@ interface GameParams {
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('');
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -33,13 +34,18 @@ export function Game() {
     navigation.goBack();
   }
 
+  async function getDiscordUser(adsId: string) {
+    fetch(`http://192.168.15.2:3333/ads/${adsId}/discord`)
+      .then(response => response.json())
+      .then(data => setDiscordDuoSelected(data.discord))
+  }
+
   useEffect(() => {
     fetch(`http://192.168.15.2:3333/games/${game.id}/ads`)
       .then(response => response.json())
       .then(data => setDuos(data))
   }, [])
 
-  console.log(duos)
   return (
     <Background>
       <SafeAreaView style={styles.container}>
@@ -85,7 +91,7 @@ export function Game() {
               weekDays={item.weekDays}
               yearsPlaying={item.yearsPlaying}
               key={item.id}
-              onConnect={() => {}}
+              onConnect={() => getDiscordUser(item.id)}
             />
           )}
           horizontal
@@ -104,8 +110,9 @@ export function Game() {
         />
 
         <DuoMatch 
-          visible={true}
-          discord="Daniel Bonasser#4371"
+          visible={discordDuoSelected.length > 0}
+          discord={discordDuoSelected}
+          onClose={() => setDiscordDuoSelected('')}
         />
 
       </SafeAreaView>
