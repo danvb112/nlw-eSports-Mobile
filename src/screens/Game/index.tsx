@@ -14,6 +14,7 @@ import { THEME } from '../../theme';
 import { Heading } from '../../components/Heading';
 import { DuoCard } from '../../components/DuoCard';
 import {DuoCardProps} from '../../components/DuoCard';
+import { DuoMatch } from '../../components/DuoMatch';
 
 interface GameParams {
   id: string;
@@ -100,6 +101,11 @@ export function Game() {
               Não há anúncios publicados ainda.
             </Text>
           )}
+        />
+
+        <DuoMatch 
+          visible={true}
+          discord="Daniel Bonasser#4371"
         />
 
       </SafeAreaView>
